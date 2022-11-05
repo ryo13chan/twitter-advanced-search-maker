@@ -29,17 +29,15 @@ type Inputs = {
 
 const Home: FC = () => {
   const { handleSubmit, register, watch, reset } = useForm<Inputs>()
-
   const title = "Twitter 高度な検索メーカー"
+
+  const isInputEmpty =
+    Object.keys(watch()).length === 0 ||
+    Object.values(watch()).every((value) => !value)
 
   const getUrl = useCallback(() => {
     const baseUrl = "https://twitter.com/search"
-    if (
-      Object.keys(watch()).length === 0 ||
-      Object.values(watch()).every((value) => !value)
-    ) {
-      return baseUrl
-    }
+    if (isInputEmpty) return baseUrl
 
     let query = "?q="
     const queryParams: {
@@ -78,7 +76,7 @@ const Home: FC = () => {
 
     query += Object.values(queryParams).join("%20")
     return `${baseUrl + query}&src=typed_query`
-  }, [watch])
+  }, [watch, isInputEmpty])
 
   const copyUrl = () => navigator.clipboard.writeText(getUrl())
   const onSubmit: SubmitHandler<Inputs> = () => window.open(getUrl(), "_blank")
@@ -194,6 +192,13 @@ const Home: FC = () => {
               フィルタ
             </Heading>
             {/* TODO: 日本語のみチェック */}
+            {/* TODO: ポジティブ・ネガティブ */}
+            {/* TODO: フォロー中のみ */}
+            {/* TODO: 公式アカウントのみ */}
+            {/* TODO: 画像あり */}
+            {/* TODO: 動画あり */}
+            {/* TODO: リンクあり */}
+            {/* TODO: 安全なツイートのみ */}
           </VStack>
           <VStack>
             <Heading as="h3" size="md">
@@ -215,6 +220,7 @@ const Home: FC = () => {
                     size="sm"
                     colorScheme="teal"
                     onClick={copyUrl}
+                    isDisabled={isInputEmpty}
                   >
                     コピー
                   </Button>
@@ -226,7 +232,12 @@ const Home: FC = () => {
             <Button w="full" onClick={() => reset()}>
               クリア
             </Button>
-            <Button colorScheme="teal" type="submit" w="full">
+            <Button
+              colorScheme="teal"
+              type="submit"
+              w="full"
+              isDisabled={isInputEmpty}
+            >
               検索
             </Button>
           </HStack>
