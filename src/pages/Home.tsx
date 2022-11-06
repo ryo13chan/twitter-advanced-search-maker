@@ -1,6 +1,7 @@
 import { FC, useCallback } from "react"
 import {
   Input,
+  Checkbox,
   Container,
   Heading,
   FormControl,
@@ -25,6 +26,16 @@ type Inputs = {
   min_replies: number
   min_faves: number
   min_retweets: number
+  lang_ja: boolean
+  images: boolean
+  videos: boolean
+  links: boolean
+  no_images: boolean
+  no_videos: boolean
+  no_links: boolean
+  follows: boolean
+  verified: boolean
+  safe: boolean
 }
 
 const Home: FC = () => {
@@ -51,6 +62,16 @@ const Home: FC = () => {
       min_replies?: string
       min_faves?: string
       min_retweets?: string
+      lang_ja?: string
+      images?: string
+      videos?: string
+      links?: string
+      no_images?: string
+      no_videos?: string
+      no_links?: string
+      follows?: string
+      verified?: string
+      safe?: string
     } = {}
 
     const keyword = watch("keyword")
@@ -73,6 +94,26 @@ const Home: FC = () => {
     if (minFaves) queryParams.min_faves = `min_faves%3A${minFaves}`
     const minRetweets = watch("min_retweets")
     if (minRetweets) queryParams.min_retweets = `min_retweets%3A${minRetweets}`
+    const langJa = watch("lang_ja")
+    if (langJa) queryParams.lang_ja = "lang%3Aja"
+    const images = watch("images")
+    if (images) queryParams.images = "filter%3Aimages"
+    const videos = watch("videos")
+    if (videos) queryParams.videos = "filter%3Avideos"
+    const links = watch("links")
+    if (links) queryParams.links = "filter%3Alinks"
+    const noImages = watch("no_images")
+    if (noImages) queryParams.no_images = "-filter%3Aimages"
+    const noVideos = watch("no_videos")
+    if (noVideos) queryParams.no_videos = "-filter%3Avideos"
+    const noLinks = watch("no_links")
+    if (noLinks) queryParams.no_links = "-filter%3Alinks"
+    const follows = watch("follows")
+    if (follows) queryParams.follows = "filter%3Afollows"
+    const verified = watch("verified")
+    if (verified) queryParams.verified = "filter%3Averified"
+    const safe = watch("safe")
+    if (safe) queryParams.safe = "filter%3Asafe"
 
     query += Object.values(queryParams).join("%20")
     return `${baseUrl + query}&src=typed_query`
@@ -191,14 +232,48 @@ const Home: FC = () => {
             <Heading as="h3" size="md">
               フィルタ
             </Heading>
-            {/* TODO: 日本語のみチェック */}
-            {/* TODO: ポジティブ・ネガティブ */}
-            {/* TODO: フォロー中のみ */}
-            {/* TODO: 公式アカウントのみ */}
-            {/* TODO: 画像あり */}
-            {/* TODO: 動画あり */}
-            {/* TODO: リンクあり */}
-            {/* TODO: 安全なツイートのみ */}
+            <FormControl>
+              <Checkbox id="lang_ja" {...register("lang_ja")}>
+                日本語のみ
+              </Checkbox>
+            </FormControl>
+            <HStack justify="start" width="full">
+              <Checkbox id="images" {...register("images")}>
+                画像あり
+              </Checkbox>
+              <Checkbox id="videos" {...register("videos")}>
+                動画あり
+              </Checkbox>
+              <Checkbox id="links" {...register("links")}>
+                リンクあり
+              </Checkbox>
+            </HStack>
+            <HStack justify="start" width="full">
+              <Checkbox id="no_images" {...register("no_images")}>
+                画像なし
+              </Checkbox>
+              <Checkbox id="no_videos" {...register("no_videos")}>
+                動画なし
+              </Checkbox>
+              <Checkbox id="no_links" {...register("no_links")}>
+                リンクなし
+              </Checkbox>
+            </HStack>
+            <FormControl>
+              <Checkbox id="follows" {...register("follows")}>
+                フォロー中のユーザーのみ
+              </Checkbox>
+            </FormControl>
+            <FormControl>
+              <Checkbox id="verified" {...register("verified")}>
+                公式アカウントのみ
+              </Checkbox>
+            </FormControl>
+            <FormControl>
+              <Checkbox id="safe" {...register("safe")}>
+                安全なツイートのみ
+              </Checkbox>
+            </FormControl>
           </VStack>
           <VStack>
             <Heading as="h3" size="md">
