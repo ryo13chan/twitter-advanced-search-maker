@@ -123,26 +123,17 @@ const Home: FC = () => {
   const onSubmit: SubmitHandler<Inputs> = () => window.open(getUrl(), "_blank")
   return (
     <>
-      <Helmet
-        title={title}
-        meta={[
-          {
-            name: "description",
-            content: "Twitterのコマンド検索を支援するフォーム",
-          },
-          { name: "twitter:card", content: "summary" },
-          { property: "og:title", content: "Twitter 高度な検索メーカー" },
-          {
-            property: "og:description",
-            content: "Twitterのコマンド検索を支援するフォーム",
-          },
-          {
-            property: "og:url",
-            content:
-              "https://vercel.com/ryo13chan/twitter-advanced-search-maker",
-          },
-        ]}
-      />
+      <Helmet>
+        <title>{title}</title>
+        <meta
+          name="description"
+          content="Twitterの高度な検索を支援するフォーム"
+        />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
+        />
+      </Helmet>
       <Container p="8">
         <Heading textAlign="center" mt="4" mb="8">
           {title}
