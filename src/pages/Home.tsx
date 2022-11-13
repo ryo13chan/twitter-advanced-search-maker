@@ -147,6 +147,7 @@ const Home: FC = () => {
               <FormLabel htmlFor="keyword">次のキーワードを含む</FormLabel>
               <Input
                 id="keyword"
+                data-cy="keyword"
                 placeholder="キーワード"
                 {...register("keyword")}
               />
@@ -157,6 +158,7 @@ const Home: FC = () => {
               </FormLabel>
               <Input
                 id="exclude_keyword"
+                data-cy="exclude_keyword"
                 placeholder="キーワード"
                 {...register("exclude_keyword")}
               />
@@ -165,6 +167,7 @@ const Home: FC = () => {
               <FormLabel htmlFor="hashtag">次のハッシュタグを含む</FormLabel>
               <Input
                 id="hashtag"
+                data-cy="hashtag"
                 placeholder="ハッシュタグ"
                 {...register("hashtag")}
               />
@@ -176,11 +179,21 @@ const Home: FC = () => {
             </Heading>
             <FormControl>
               <FormLabel htmlFor="from">次のユーザーが投稿</FormLabel>
-              <Input id="from" placeholder="ユーザー名" {...register("from")} />
+              <Input
+                id="from"
+                data-cy="from"
+                placeholder="ユーザー名"
+                {...register("from")}
+              />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="to">次のユーザー宛て</FormLabel>
-              <Input id="to" placeholder="ユーザー名" {...register("to")} />
+              <Input
+                id="to"
+                data-cy="to"
+                placeholder="ユーザー名"
+                {...register("to")}
+              />
             </FormControl>
           </VStack>
           <VStack mb="8">
@@ -189,11 +202,21 @@ const Home: FC = () => {
             </Heading>
             <FormControl>
               <FormLabel htmlFor="since">次の日付以降</FormLabel>
-              <Input id="since" type="date" {...register("since")} />
+              <Input
+                id="since"
+                data-cy="since"
+                type="date"
+                {...register("since")}
+              />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="until">次の日付以前</FormLabel>
-              <Input id="until" type="date" {...register("until")} />
+              <Input
+                id="until"
+                data-cy="until"
+                type="date"
+                {...register("until")}
+              />
             </FormControl>
           </VStack>
           <VStack mb="8">
@@ -204,6 +227,7 @@ const Home: FC = () => {
               <FormLabel htmlFor="min_replies">次の返信数以上</FormLabel>
               <Input
                 id="min_replies"
+                data-cy="min_replies"
                 type="number"
                 placeholder="返信数"
                 {...register("min_replies")}
@@ -213,6 +237,7 @@ const Home: FC = () => {
               <FormLabel htmlFor="min_faves">次のいいね数以上</FormLabel>
               <Input
                 id="min_faves"
+                data-cy="min_faves"
                 type="number"
                 placeholder="いいね数"
                 {...register("min_faves")}
@@ -222,6 +247,7 @@ const Home: FC = () => {
               <FormLabel htmlFor="min_retweets">次のリツイート数以上</FormLabel>
               <Input
                 id="min_retweets"
+                data-cy="min_retweets"
                 type="number"
                 placeholder="リツイート数"
                 {...register("min_retweets")}
@@ -283,6 +309,7 @@ const Home: FC = () => {
               <InputGroup size="md">
                 <Input
                   id="url"
+                  data-cy="url"
                   pr="4.5rem"
                   placeholder="Enter password"
                   isReadOnly
@@ -291,6 +318,7 @@ const Home: FC = () => {
                 />
                 <InputRightElement width="4.5rem">
                   <Button
+                    data-cy="copy"
                     h="1.75rem"
                     size="sm"
                     colorScheme="teal"
@@ -304,10 +332,11 @@ const Home: FC = () => {
             </FormControl>
           </VStack>
           <HStack mt={4}>
-            <Button w="full" onClick={() => reset()}>
+            <Button data-cy="clear" w="full" onClick={() => reset()}>
               クリア
             </Button>
             <Button
+              data-cy="search"
               colorScheme="teal"
               type="submit"
               w="full"
