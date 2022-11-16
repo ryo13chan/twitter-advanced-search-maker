@@ -259,44 +259,60 @@ const Home: FC = () => {
               フィルタ
             </Heading>
             <FormControl>
-              <Checkbox id="lang_ja" {...register("lang_ja")}>
+              <Checkbox id="lang_ja" data-cy="lang_ja" {...register("lang_ja")}>
                 日本語のみ
               </Checkbox>
             </FormControl>
             <HStack justify="start" width="full">
-              <Checkbox id="images" {...register("images")}>
+              <Checkbox id="images" data-cy="images" {...register("images")}>
                 画像あり
               </Checkbox>
-              <Checkbox id="videos" {...register("videos")}>
+              <Checkbox id="videos" data-cy="videos" {...register("videos")}>
                 動画あり
               </Checkbox>
-              <Checkbox id="links" {...register("links")}>
+              <Checkbox id="links" data-cy="links" {...register("links")}>
                 リンクあり
               </Checkbox>
             </HStack>
             <HStack justify="start" width="full">
-              <Checkbox id="no_images" {...register("no_images")}>
+              <Checkbox
+                id="no_images"
+                data-cy="no_images"
+                {...register("no_images")}
+              >
                 画像なし
               </Checkbox>
-              <Checkbox id="no_videos" {...register("no_videos")}>
+              <Checkbox
+                id="no_videos"
+                data-cy="no_videos"
+                {...register("no_videos")}
+              >
                 動画なし
               </Checkbox>
-              <Checkbox id="no_links" {...register("no_links")}>
+              <Checkbox
+                id="no_links"
+                data-cy="no_links"
+                {...register("no_links")}
+              >
                 リンクなし
               </Checkbox>
             </HStack>
             <FormControl>
-              <Checkbox id="follows" {...register("follows")}>
+              <Checkbox id="follows" data-cy="follows" {...register("follows")}>
                 フォロー中のユーザーのみ
               </Checkbox>
             </FormControl>
             <FormControl>
-              <Checkbox id="verified" {...register("verified")}>
+              <Checkbox
+                id="verified"
+                data-cy="verified"
+                {...register("verified")}
+              >
                 公式アカウントのみ
               </Checkbox>
             </FormControl>
             <FormControl>
-              <Checkbox id="safe" {...register("safe")}>
+              <Checkbox id="safe" data-cy="safe" {...register("safe")}>
                 安全なツイートのみ
               </Checkbox>
             </FormControl>

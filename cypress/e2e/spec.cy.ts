@@ -108,11 +108,120 @@ describe("エンゲージメント検索", () => {
     )
   })
 })
-// TODO: フィルタ検索
-
-// TODO: 複合条件のテスト
-
-describe("コピーボタン", () => {
+describe("フィルタ検索", () => {
+  beforeEach(() => {
+    cy.visit("/")
+  })
+  it("日本語のみ", () => {
+    // 入力
+    cy.findByTestId("lang_ja").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=lang%3Aja&src=typed_query"
+    )
+  })
+  it("画像あり", () => {
+    // 入力
+    cy.findByTestId("images").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=filter%3Aimages&src=typed_query"
+    )
+  })
+  it("動画あり", () => {
+    // 入力
+    cy.findByTestId("videos").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=filter%3Avideos&src=typed_query"
+    )
+  })
+  it("リンクあり", () => {
+    // 入力
+    cy.findByTestId("links").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=filter%3Alinks&src=typed_query"
+    )
+  })
+  it("画像なし", () => {
+    // 入力
+    cy.findByTestId("no_images").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=-filter%3Aimages&src=typed_query"
+    )
+  })
+  it("動画なし", () => {
+    // 入力
+    cy.findByTestId("no_videos").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=-filter%3Avideos&src=typed_query"
+    )
+  })
+  it("リンクなし", () => {
+    // 入力
+    cy.findByTestId("no_links").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=-filter%3Alinks&src=typed_query"
+    )
+  })
+  it("フォロー中のユーザーのみ", () => {
+    // 入力
+    cy.findByTestId("follows").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=filter%3Afollows&src=typed_query"
+    )
+  })
+  it("公式アカウントのみ", () => {
+    // 入力
+    cy.findByTestId("verified").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=filter%3Averified&src=typed_query"
+    )
+  })
+  it("安全なツイートのみ", () => {
+    // 入力
+    cy.findByTestId("safe").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=filter%3Asafe&src=typed_query"
+    )
+  })
+})
+describe("複数条件検索", () => {
+  beforeEach(() => {
+    cy.visit("/")
+  })
+  it("キーワード+ユーザー+日付+エンゲージメント+フィルタ", () => {
+    // 入力
+    cy.findByTestId("keyword").type("React")
+    cy.findByTestId("from").type("ryo_chan_13")
+    cy.findByTestId("since").type("2022-01-01")
+    cy.findByTestId("min_faves").type("1")
+    cy.findByTestId("links").findByRole("checkbox").check({ force: true })
+    // URL
+    cy.findByTestId("url").should(
+      "have.value",
+      "https://twitter.com/search?q=React%20from%3Aryo_chan_13%20since%3A2022-01-01%20min_faves%3A1%20filter%3Alinks&src=typed_query"
+    )
+  })
+})
+describe.only("コピーボタン", () => {
   beforeEach(() => {
     cy.visit("/")
   })
